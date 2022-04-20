@@ -64,13 +64,14 @@ include_once './functions/conexao.php';
 
 
 if($_POST){
+$total = 0;
 
     try{
         $Conexao = Conexao::getConnection();
                     
 
         //nome
-        $query = $Conexao->query("SELECT * FROM PDV_VD WHERE NR_ECF = ".$_POST['NR_ECF']." AND CD_FILIAL = ".$_POST['CD_FILIAL']." AND CD_CX =".$_POST['CD_CX']."");
+        $query = $Conexao->query("SELECT CD_VD FROM PDV_VD WHERE NR_ECF = ".$_POST['NR_ECF']." AND CD_FILIAL = ".$_POST['CD_FILIAL']." AND CD_CX =".$_POST['CD_CX']."");
         $CUPON = $query->fetchAll();
 
         
@@ -80,7 +81,80 @@ if($_POST){
 
     }
 
-    var_dump($CUPON);
+
+    try{
+        $Conexao = Conexao::getConnection();
+                    
+
+        
+        $query = $Conexao->query("SELECT CD_PROD FROM PDV_VD_IT WHERE CD_VD = ".$CUPON['0']['CD_VD']."");
+        $VENDA = $query->fetchAll();
+
+        
+
+    }catch(Exception $e){
+        echo $e->getMessage();
+
+    }
+
+    foreach($VENDA as $venda){
+
+        
+        //echo("produto vendido: ".$venda['0']);
+
+        try{
+            $Conexao = Conexao::getConnection();
+                        
     
+            
+            $query = $Conexao->query("SELECT CD_PROD FROM EST_PROD WHERE CD_PROD = ".$venda['0']." AND CD_FABRIC = 327 ");
+            $PRODUTOS_VALIDOS = $query->fetchAll();
+    
+            
+    
+        }catch(Exception $e){
+            echo $e->getMessage();
+    
+        }
+
+        foreach($PRODUTOS_VALIDOS as $prod_valido){
+            echo("<br>Produto válido: ".$prod_valido['0']."<br>");
+
+
+
+            try{
+                $Conexao = Conexao::getConnection();
+                            
+        
+                
+                $query = $Conexao->query("SELECT VLR_TABELA FROM EST_PROD_PRECO WHERE CD_PROD = ".$prod_valido['0']." AND CD_FILIAL = ".$_POST['CD_FILIAL']."");
+                $PRECO = $query->fetchAll();
+        
+                
+        
+            }catch(Exception $e){
+                echo $e->getMessage();
+        
+            }
+
+            echo("Valor: ".$PRECO['0']['VLR_TABELA']);
+            $total += $PRECO['0']['VLR_TABELA'];
+
+        }
+
+        echo("<br>");
+    }
+
+    if($total >= 150){
+
+        echo("Valor atingido<br>");
+
+    }else{
+
+        echo("Valor não atingido<br>");
+
+    }
+    echo("Total válido = ".$total);
+
 }
 
