@@ -55,6 +55,7 @@ include_once './functions/conexao.php';
 
         </form>
     </div>
+<br>
 </body>
 </html>
 
@@ -70,7 +71,7 @@ if($_POST){
 
         //nome
         $query = $Conexao->query("SELECT * FROM PDV_VD WHERE NR_ECF = ".$_POST['NR_ECF']." AND CD_FILIAL = ".$_POST['CD_FILIAL']." AND CD_CX =".$_POST['CD_CX']."");
-        $NOME = $query->fetchAll();
+        $CUPON = $query->fetchAll();
 
         
 
@@ -78,6 +79,8 @@ if($_POST){
         echo $e->getMessage();
 
     }
+
+    var_dump($CUPON);
     
 }
 
