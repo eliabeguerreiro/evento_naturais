@@ -3,6 +3,9 @@ session_start();
 include_once './functions/conexao.php';
 
 
+echo('<h3>SISTEMA EM ATUALIZAÇÃO - VERIFIQUE DISPONIBILIDADE COM O SUPORTE</h3><br><br><br>');
+
+
 //var_dump($_SESSION);
 
 if($_GET){
@@ -10,7 +13,21 @@ if($_GET){
         $_SESSION['tipo'] = 'cupom';
 
         
+        $count ="count(*)";
+        $to = "SELECT $count FROM entradas";
 
+        $tot = mysqli_query($conn, $to);
+        $total = mysqli_fetch_assoc($tot);
+
+        if($_SESSION['usuario']['tipo'] == 'admin'){
+
+            echo("Ingressos disponiveis: ");
+            echo(685 - $total['count(*)']);
+
+        }
+
+
+        
         ?>
 
         <!DOCTYPE html>
@@ -42,7 +59,7 @@ if($_GET){
                 <div>
 
                         <a href="?modo=cupom">Verificar Cupom</a><br>
-                        <a href="?modo=ingresso">Ingresso Vendido</a><br>
+                        <!--a href="?modo=ingresso">Ingresso Vendido</a><br-->
 
                         <?php
                             if($_SESSION['usuario']['tipo'] == 'admin'){
@@ -88,54 +105,54 @@ if($_GET){
 
 
         if($_POST){
-        $total = 0;
+            $total = 0;
 
-            try{
-                $Conexao = Conexao::getConnection();
-                            
+            $ver = "SELECT * FROM entradas WHERE cupom = '".$_POST['NR_ECF']."'";
+            $veri = mysqli_query($conn, $ver);
+            $verify = mysqli_num_rows($veri);
 
-                //nome
-                $query = $Conexao->query("SELECT CD_VD FROM PDV_VD WHERE NR_ECF = ".$_POST['NR_ECF']." AND CD_FILIAL = ".$_POST['CD_FILIAL']." AND CD_CX =".$_POST['CD_CX']."");
-                $CUPON = $query->fetchAll();
-
-
-            }catch(Exception $e){
-                echo $e->getMessage();
-
-            }
-
-            try{
-                $Conexao = Conexao::getConnection();
-                            
+            if($verify != 0){
 
                 
-                $query = $Conexao->query("SELECT CD_PROD FROM PDV_VD_IT WHERE CD_VD = ".$CUPON['0']['CD_VD']."");
-                $VENDA = $query->fetchAll();
+                echo("Esse cupom já foi utilizado!<br>");
 
+            }else{
                 
-
-            }catch(Exception $e){
-                echo $e->getMessage();
-
-            }
-
-            foreach($VENDA as $venda){
-
-                
-                //echo("produto vendido: ".$venda['0']);
-
                 try{
                     $Conexao = Conexao::getConnection();
                                 
-            
-                    
-                    $query = $Conexao->query("SELECT CD_PROD FROM EST_PROD WHERE CD_PROD = ".$venda['0']." AND CD_FABRIC = 327 ");
-                    $PRODUTOS_VALIDOS = $query->fetchAll();
-            
-                    
-            
+                    $query = $Conexao->query("SELECT CD_VD FROM PDV_VD WHERE NR_ECF = ".$_POST['NR_ECF']." AND CD_FILIAL = ".$_POST['CD_FILIAL']." AND CD_CX =".$_POST['CD_CX']."");
+                    $CUPON = $query->fetchAll();
+
+
                 }catch(Exception $e){
                     echo $e->getMessage();
+
+                }
+
+                try{
+                    $Conexao = Conexao::getConnection();
+                            
+                    $query = $Conexao->query("SELECT CD_PROD FROM PDV_VD_IT WHERE CD_VD = ".$CUPON['0']['CD_VD']."");
+                    $VENDA = $query->fetchAll();
+
+    
+                }catch(Exception $e){
+                    echo $e->getMessage();
+
+                }
+
+                foreach($VENDA as $venda){
+
+                    try{
+                        $Conexao = Conexao::getConnection();
+                                    
+                        $query = $Conexao->query("SELECT CD_PROD FROM EST_PROD WHERE CD_PROD = ".$venda['0']." AND CD_FABRIC = 327 ");
+                        $PRODUTOS_VALIDOS = $query->fetchAll();
+                
+                        
+                    }catch(Exception $e){
+                        echo $e->getMessage();
             
                 }
 
@@ -165,27 +182,47 @@ if($_GET){
                 }
 
                 echo("<br>");
+            
+            //fim do teste de verificação
             }
 
             if($total >= 150){
 
-                //echo("Valor atingido<br>");
                 $_SESSION['cupom'] = $_POST['NR_ECF'];
+
+                $quantidade = round($total)/150;
+
+                if($quantidade >=2){
+
+                    $_SESSION['quantidade'] = 2;
+
+                }elseif($quantidade >= 3){
+
+                    $_SESSION['quantidade'] = 3;
+
+                }elseif($quantidade >= 4){
+
+                    $_SESSION['quantidade'] = 4;
+
+                }elseif($quantidade >= 5){
+
+                    $_SESSION['quantidade'] = 5;
+
+                }
+
                 header("Location: cadastro.php");
 
             }else{
 
                 echo("Valor não atingido<br>");
                 
-
             }
-                echo("Total de intens válidos R$:".$total);
+            echo("Total de intens válidos R$:".$total);
 
         }
 
-
-
-
+            //fim do if POST
+        }
 
 
     }elseif($_GET['modo']=='ingresso'){
@@ -199,6 +236,18 @@ if($_GET){
 
         }
         
+        $count ="count(*)";
+        $to = "SELECT $count FROM entradas";
+
+        $tot = mysqli_query($conn, $to);
+        $total = mysqli_fetch_assoc($tot);
+
+        if($_SESSION['usuario']['tipo'] == 'admin'){
+
+            echo("Ingressos disponiveis: ");
+            echo(685 - $total['count(*)']);
+
+        }
 
         ?>
         <!DOCTYPE html>
@@ -230,7 +279,7 @@ if($_GET){
                 <div>
     
                         <a href="?modo=cupom">Verificar Cupom</a><br>
-                        <a href="?modo=ingresso">Ingresso Vendido</a><br>
+                        <!--a href="?modo=ingresso">Ingresso Vendido</a><br-->
                         <?php
                             if($_SESSION['usuario']['tipo'] == 'admin'){
 
@@ -290,8 +339,21 @@ if($_GET){
     }
 
 
+//fim do if GET
 }else{
 
+    $count ="count(*)";
+    $to = "SELECT $count FROM entradas";
+
+    $tot = mysqli_query($conn, $to);
+    $total = mysqli_fetch_assoc($tot);
+
+    if($_SESSION['usuario']['tipo'] == 'admin'){
+
+        echo("Ingressos disponiveis: ");
+        echo(685 - $total['count(*)']);
+
+    }
     ?>
 
     <!DOCTYPE html>
@@ -323,7 +385,7 @@ if($_GET){
             <div>
 
                     <a href="?modo=cupom">Verificar Cupom</a><br>
-                    <a href="?modo=ingresso">Ingresso Vendido</a><br>
+                    <!--a href="?modo=ingresso">Ingresso Vendido</a><br-->
                     <?php
                             if($_SESSION['usuario']['tipo'] == 'admin'){
 

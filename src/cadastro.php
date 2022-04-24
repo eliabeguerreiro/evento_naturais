@@ -5,8 +5,6 @@ include("./functions/conexao.php");
 //var_dump($_SESSION);
 
 
-echo("<br>");
-
 /*
 if(!empty($_SESSION['usuario']['id']))
 {}
@@ -246,11 +244,11 @@ if($_GET){
                     </div>
     
                     <label>Digite sua Cidade</label>
-                    <input class="form-control" type="mail" name="CIDADE" placeholder="exemplo@emali">
+                    <input class="form-control" type="test" name="CIDADE" placeholder="">
                     <br><br>
     
                     <label>Digite seu bairro</label>
-                    <input class="form-control" type="mail" name="BAIRRO" placeholder="exemplo@emali">
+                    <input class="form-control" type="text" name="BAIRRO" placeholder="">
                     <br><br>
     
                     <input required type="checkbox" id="scales" name="autorizo">
