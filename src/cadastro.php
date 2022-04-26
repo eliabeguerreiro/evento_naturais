@@ -23,18 +23,15 @@ if($_GET){
            
             //echo(date('Y,m,d'));
             echo('<br>');
-            
-            
-            $dados = $_POST;
-                  
 
             
+            $dados = $_POST;
+                
             $cad = "INSERT INTO participantes (NOME, CPF, EMAIL, NUMERO, DT_NSC, CIDADE, BAIRRO, UF, SEXO) values 
             ('".$dados['NOME']."', '0', '".$dados['EMAIL']."', '0', '".date('Y,m,d')."', '0', '0', '0', '0') ";
             $cada = mysqli_query($conn, $cad);
             
 
-            echo($cad);
 
             if($cada){
         
@@ -43,10 +40,6 @@ if($_GET){
 
             }
             
-            
-                       
-            
-
         }
 
         ?>
@@ -61,7 +54,7 @@ if($_GET){
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
                 integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
             <!-- Our Custom CSS -->
-            <link rel="stylesheet" href="styles.css">
+            <link rel="stylesheet" href="./css/style.css">
             <!-- Link Google Icons -->
             <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
             <!-- Font Awesome JS -->
@@ -78,9 +71,10 @@ if($_GET){
                 <?php
 
         ?>
-            </center>
-            <div class='jumbotron'>
-            <form method="POST" action="" enctype="multipart/form-data">
+        <main class="back">
+    <section class="dashboard">
+            <div style="background-color: #b0bd6d; padding: 50px 70px 50px 70px; border-radius: 15px; border-width: 2px; border-style: solid; border-color: #748535">
+                <form method="POST" action="" enctype="multipart/form-data">
                     <h3>Todos os dados a seguir são obrigatorios!</h3>
                     <br>
                     <label>Digite o nome completo</label>
@@ -89,12 +83,15 @@ if($_GET){
                     <label>Digite o e-mail</label>
                     <input class="form-control" type="mail" name="EMAIL" placeholder="exemplo@emali">
                     <br><br>
-
+                    
                     <br><br><br>
                     <input class="btn btn-primary" type="submit" name="dados" value="Cadastrar"><br>
-
+                    
                 </form>
             </div>
+         </main>
+        </section>
+        </center>
         </body>
         </html>
 
@@ -105,14 +102,7 @@ if($_GET){
 
     }
 
-
-
-
 }else{
-
-
-
-
 
     if($_POST){
 
@@ -154,7 +144,7 @@ if($_GET){
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
             integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
         <!-- Our Custom CSS -->
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="./css/style.css">
         <!-- Link Google Icons -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <!-- Font Awesome JS -->
@@ -171,42 +161,39 @@ if($_GET){
             <?php
     
     ?>
-        </center>
-        <div class='jumbotron'>
-        <form method="POST" action="" enctype="multipart/form-data">
-                <h3>Todos os dados a seguir são obrigatorios!</h3>
+    <main class="back">
+    <section class="dashboard">
+        <div style="background-color: #b0bd6d; padding: 50px 70px 50px 70px; border-radius: 15px; border-width: 2px; border-style: solid; border-color: #748535">
+            <form method="POST" action="" enctype="multipart/form-data">
+                <h3 style="color: #fff;">Todos os dados a seguir são obrigatorios!</h3>
                 <br>
-                <label>Digite seu nome completo</label>
+                <label style="color: #fff;">Digite seu nome completo</label>
                 <input class="form-control" type="text" name="NOME" placeholder="Nome completo">
                 <br><br>
-                <label>Digite seu CPF</label>
-                <input class="form-control" type="number" name="CPF" placeholder="número do RG">
+                <label style="color: #fff;">Digite seu CPF</label>
+                <input class="form-control" type="number" name="CPF" placeholder="número do CPF">
                 <br><br>
-                <label>Digite sua data de nascimento</label>
+                <label style="color: #fff;">Digite sua data de nascimento</label>
                 <input class="form-control" type="date" name="DT_NSC" >
                 <br><br>
-                <label>Digite seu e-mail</label>
-                <input class="form-control" type="mail" name="EMAIL" placeholder="exemplo@emali">
+                <label style="color: #fff;">Digite seu e-mail</label>
+                <input class="form-control" type="mail" name="EMAIL" placeholder="exemplo@email.com">
                 <br><br>
-                <label>Digite seu telefone para contato</label>
-                <input class="form-control" type="number" name="NUMERO" placeholder="DDD9xxxx-xxxx">
+                <label style="color: #fff;">Digite seu telefone para contato</label>
+                <input class="form-control" type="number" name="NUMERO" placeholder="DDD999999999">
                 <br><br>
                 
                 
-                <label for="endereco">Sexo</label>
-    
-                <div class="col-md-4">
-                       
-    
+                <label for="endereco" style="color: #fff;">Sexo</label>
+                    
                     <select class="form-control" name="SEXO" id="">
                         <option value="M">Masculino</option>
                         <option value="F">Femenino</option>
                         <option value="0">Outro</option>
                     </select><br><br>  
-           
-                <label for="endereco">Endereço</label>
+
+                <label for="endereco" style="color: #fff;">Endereço</label>
     
-                <div class="col-md-4">
                        
     
                     <select class="form-control" name="UF" id="">
@@ -241,41 +228,30 @@ if($_GET){
                         <option value="EX">Estrangeiro</option>
                     </select><br><br>   
                                         
-                    </div>
     
-                    <label>Digite sua Cidade</label>
-                    <input class="form-control" type="test" name="CIDADE" placeholder="">
+                    <label style="color: #fff;">Digite sua Cidade</label>
+                    <input class="form-control" type="test" name="CIDADE" placeholder="EX.: Campina Grande">
                     <br><br>
     
-                    <label>Digite seu bairro</label>
-                    <input class="form-control" type="text" name="BAIRRO" placeholder="">
+                    <label style="color: #fff;">Digite seu bairro</label>
+                    <input class="form-control" type="text" name="BAIRRO" placeholder="Ex.: Catolé">
                     <br><br>
     
                     <input required type="checkbox" id="scales" name="autorizo">
-                    <label>Autorizo o uso dos meus dados para terceiros  a fins comerciais, nos termos da Política de Privacidade e da Lei 12.965/14.
-                        </label>
+                    <label style="color: #fff;" for="scales">Autorizo o uso dos meus dados para terceiros a fins comerciais, nos termos da Política de Privacidade e da Lei 12.965/14.</label>
                 
     
     
                 <br><br><br>
-                <input class="btn btn-primary" type="submit" name="dados" value="Cadastrar"><br>
+                <input class="btn btn-success" type="submit" name="dados" value="Cadastrar"><br>
     
             </form>
         </div>
+    </main>
+    </section>
+            </center>
     </body>
     </html>
     <?php
 
 }
-
-
-
-
-
-
-
-
-
-
-
-

@@ -3,9 +3,9 @@
 /*
 $senha = 'jOkinh@a';
 $senha_encriptada = password_hash($senha, PASSWORD_DEFAULT);
-echo($senha_encriptada.'<br>');
+echo($senha_encriptada);
 */
-
+echo("<h1>Não criar ingressos agora, aguarde novas atualizações!</h1>");
 ?>
 <html lang="pt-br">
 
@@ -13,38 +13,33 @@ echo($senha_encriptada.'<br>');
     <meta charset="utf-8">
     <title>Simposio Naturais</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="styles.css" rel="stylesheet">
-    <link href="bootstrap.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <div class="circulo"></div>
     <main>
-        <section class="glass">
+        <section class="back">
                 <div class="dashboard">
-                    
-                    <p>
+                    <center><img src="./images/logo.png" alt="LogoNaturais" width="200px" style="margin-bottom: 30px"></center>
                     <form method="POST" action="verifica.php">
-                        <div class="form-group">
+                        <div class="label-input">
                             <label for="exampleInputEmail1">Login</label>
-                            <input type="usuario" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            <input required type="usuario" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                                 name="usuario" placeholder="Digite seu login">
-                           
-                        <div class="form-group mt-4">
+                        <div class="label-input">
                             <label for="exampleInputPassword1">Senha</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" name="senha"
+                            <input required type="password" class="form-control" id="exampleInputPassword1" name="senha"
                                 placeholder="Digite sua senha">
                             <br>
                         </div>
-                        <button class="btn btn-primary" type="submit" name="btnLogin" value="acessar">Login</button>
+                        <div class="btn-area">
+                            <button class="btn btn-success" type="submit" name="btnLogin" value="acessar">Login</button>
+                        </div>
                     </form>
                 </div>
         </section>
     </main>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/min.js/0.2.3/$.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-    </script>
 </body>
 
 </html>

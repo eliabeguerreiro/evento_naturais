@@ -3,8 +3,6 @@ session_start();
 include_once './functions/conexao.php';
 
 
-echo('<h3>SISTEMA EM ATUALIZAÇÃO - VERIFIQUE DISPONIBILIDADE COM O SUPORTE</h3><br><br><br>');
-
 
 //var_dump($_SESSION);
 
@@ -18,14 +16,6 @@ if($_GET){
 
         $tot = mysqli_query($conn, $to);
         $total = mysqli_fetch_assoc($tot);
-
-        if($_SESSION['usuario']['tipo'] == 'admin'){
-
-            echo("Ingressos disponiveis: ");
-            echo(685 - $total['count(*)']);
-
-        }
-
 
         
         ?>
@@ -41,7 +31,7 @@ if($_GET){
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
                 integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
             <!-- Our Custom CSS -->
-            <link rel="stylesheet" href="styles.css">
+            <link rel="stylesheet" href="./css/style.css">
             <!-- Link Google Icons -->
             <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
             <!-- Font Awesome JS -->
@@ -55,53 +45,64 @@ if($_GET){
 
         <body>
             <center>
+                <main class="back">
+                <div class="header">
+                <img height="65px" width="auto" src="../images/softLogo.png" alt="Logo">
+                <div style="display: flex; font-size: 20px;">
 
-                <div>
+                <a style="margin-right: 15px; color: #fff;" href="?modo=cupom">Verificar Cupom</a><br>
+                <!--a href="?modo=ingresso">Ingresso Vendido</a><br-->
 
-                        <a href="?modo=cupom">Verificar Cupom</a><br>
-                        <!--a href="?modo=ingresso">Ingresso Vendido</a><br-->
+                <?php
+                    if($_SESSION['usuario']['tipo'] == 'admin'){
 
-                        <?php
-                            if($_SESSION['usuario']['tipo'] == 'admin'){
+                        echo("<a style='color: #fff;' href='?modo=cortesia'>Cortesia</a><br>");
 
-                                echo("<a href='?modo=cortesia'>Cortesia</a><br>");
+                    }
 
-                            }
-
-                        ?>
-
-
-                        
+                ?>
 
                 </div>
+                <div class="ingressos">
+                    <?php
+                        if($_SESSION['usuario']['tipo'] == 'admin'){
+                            echo("Ingressos disponiveis: ");
+                            echo(685 - $total['count(*)']);
+                        }
+                    ?>
+                </div>
+                </div>
+                    <section class="dashboard">
 
+                        <div style="background-color: #b0bd6d; padding: 50px 70px 50px 70px; border-radius: 15px; border-width: 2px; border-style: solid; border-color: #748535">
+                            <form method="POST" action="" enctype="multipart/form-data">
+                                
+                                <h3 style="color: #fff">Digite os dados que estão no cupom físcal.</h3>
+                                <br>
+                                <label style="color: #fff">NR:</label>
+                                <input required class="form-control" type="number" name="NR_ECF">
+                                <br><br>
+                                <label style="color: #fff">Caixa</label>
+                                <input required class="form-control" type="number" name="CD_CX">
+                                <br><br>
+                                <label style="color: #fff">Loja</label>
+                                <input required class="form-control" type="number" name="CD_FILIAL">
+                                <br><br>
+                                
+                                <br>
+                                <input class="btn btn-success" type="submit" name="cupon" value="Cadastrar"><br>
+                                
+                            </form>
+                        </div>
+                        <br>
+                    </section>
+                </main>
             </center>
-            <div class='jumbotron'>
-            <form method="POST" action="" enctype="multipart/form-data">
-
-                    <h3>Digite os dados que estão no cupom físcal.</h3>
-                    <br>
-                    <label>NR:</label>
-                    <input required class="form-control" type="number" name="NR_ECF">
-                    <br><br>
-                    <label>Caixa</label>
-                    <input required class="form-control" type="number" name="CD_CX">
-                    <br><br>
-                    <label>Loja</label>
-                    <input required class="form-control" type="number" name="CD_FILIAL">
-                    <br><br>
-                
-                    <br>
-                    <input class="btn btn-primary" type="submit" name="cupon" value="Cadastrar"><br>
-
-                </form>
-            </div>
-        <br>
-        </body>
-        </html>
-
-
-        <?php
+            </body>
+            </html>
+            
+            
+            <?php
 
 
         if($_POST){
@@ -132,8 +133,8 @@ if($_GET){
 
                 try{
                     $Conexao = Conexao::getConnection();
-                            
-                    $query = $Conexao->query("SELECT CD_PROD FROM PDV_VD_IT WHERE CD_VD = ".$CUPON['0']['CD_VD']."");
+
+                    $query = $Conexao->query("SELECT CD_PROD, QT_IT FROM PDV_VD_IT WHERE CD_VD = ".$CUPON['0']['CD_VD']."");
                     $VENDA = $query->fetchAll();
 
     
@@ -177,47 +178,81 @@ if($_GET){
                     }
 
                     //echo("Valor: ".$PRECO['0']['VLR_TABELA']);
-                    $total += $PRECO['0']['VLR_TABELA'];
+                    $total += ($PRECO['0']['VLR_TABELA'] * $VENDA['0']['QT_IT']);
 
+                    echo($total);
                 }
 
                 echo("<br>");
+
+                if($total<150){
+                    
+                    echo("Valor não atingido<br>");
+                    echo("Total de intens válidos R$:".$total);
+
+                }elseif($total >= 150 || $total <299){
+
+                    $_SESSION['cupom'] = $_POST['NR_ECF'];
+                    $_SESSION['quantidade'] = 1;
+    
+                    header("Location: cadastro.php");
+    
+                }elseif($total>=300 || $total <449){
+                    
+                    $_SESSION['quantidade'] = 2;
+                    header("Location: cadastro.php");
+                    
+                }elseif($total>450 || $total <599){
+
+                    
+                    $_SESSION['quantidade'] = 3;
+                    header("Location: cadastro.php");
+
+
+                }elseif($total>600 || $total <749){
+
+                    $_SESSION['quantidade'] = 4;
+                    header("Location: cadastro.php");
+
+
+                }elseif($total>750 || $total <899){
+
+                    
+                    $_SESSION['quantidade'] = 5;
+                    header("Location: cadastro.php");
+
+
+                }elseif($total>900 || $total <1049){
+
+                    
+                    $_SESSION['quantidade'] = 6;
+                    header("Location: cadastro.php");
+
+
+                }elseif($total>1050 || $total <1199){
+
+                    
+                    $_SESSION['quantidade'] = 7;
+                    header("Location: cadastro.php");
+
+
+                }elseif($total>1200){
+
+                    
+                    $_SESSION['quantidade'] = 8;
+                    
+                    
+                    
+                    header("Location: cadastro.php");
+
+
+                }
+
+                //var_dump($_SESSION['quantidade']);
             
             //fim do teste de verificação
             }
 
-            if($total >= 150){
-
-                $_SESSION['cupom'] = $_POST['NR_ECF'];
-
-                $quantidade = round($total)/150;
-
-                if($quantidade >=2){
-
-                    $_SESSION['quantidade'] = 2;
-
-                }elseif($quantidade >= 3){
-
-                    $_SESSION['quantidade'] = 3;
-
-                }elseif($quantidade >= 4){
-
-                    $_SESSION['quantidade'] = 4;
-
-                }elseif($quantidade >= 5){
-
-                    $_SESSION['quantidade'] = 5;
-
-                }
-
-                header("Location: cadastro.php");
-
-            }else{
-
-                echo("Valor não atingido<br>");
-                
-            }
-            echo("Total de intens válidos R$:".$total);
 
         }
 
@@ -242,13 +277,6 @@ if($_GET){
         $tot = mysqli_query($conn, $to);
         $total = mysqli_fetch_assoc($tot);
 
-        if($_SESSION['usuario']['tipo'] == 'admin'){
-
-            echo("Ingressos disponiveis: ");
-            echo(685 - $total['count(*)']);
-
-        }
-
         ?>
         <!DOCTYPE html>
         <html lang="pt-br">
@@ -261,7 +289,7 @@ if($_GET){
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
                 integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
             <!-- Our Custom CSS -->
-            <link rel="stylesheet" href="styles.css">
+            <link rel="stylesheet" href="./css/style.css">
             <!-- Link Google Icons -->
             <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
             <!-- Font Awesome JS -->
@@ -275,25 +303,37 @@ if($_GET){
     
         <body>
             <center>
-    
-                <div>
-    
-                        <a href="?modo=cupom">Verificar Cupom</a><br>
-                        <!--a href="?modo=ingresso">Ingresso Vendido</a><br-->
-                        <?php
-                            if($_SESSION['usuario']['tipo'] == 'admin'){
+            <main class="back">
+            <div class="header">
+                <img height="65px" width="auto" src="../images/softLogo.png" alt="Logo">
+                <div style="display: flex; font-size: 20px;">
 
-                                echo("<a href='?modo=cortesia'>Cortesia</a><br>");
+                <a style="margin-right: 15px; color: #fff;" href="?modo=cupom">Verificar Cupom</a><br>
+                <!--a href="?modo=ingresso">Ingresso Vendido</a><br-->
 
-                            }
+                <?php
+                    if($_SESSION['usuario']['tipo'] == 'admin'){
 
-                        ?>
+                        echo("<a style='color: #fff;' href='?modo=cortesia'>Cortesia</a><br>");
 
-    
+                    }
+
+                ?>
+
                 </div>
+                <div class="ingressos">
+                    <?php
+                        if($_SESSION['usuario']['tipo'] == 'admin'){
+                            echo("Ingressos disponiveis: ");
+                            echo(685 - $total['count(*)']);
+                        }
+                    ?>
+                </div>
+                </div>
+                    <section class="dashboard">
     
             
-            <div class='jumbotron'>
+            <div style="background-color: #b0bd6d; padding: 50px 70px 50px 70px; border-radius: 15px; border-width: 2px; border-style: solid; border-color: #748535">
             <form method="POST" action="" enctype="multipart/form-data">
 
             <h3><label for="endereco">Selecione a forma de pagamento</label></h3>
@@ -314,12 +354,14 @@ if($_GET){
                 </div>
 
                     <br>
-                    <input class="btn btn-primary" type="submit" name="ingresso" value="Cadastrar"><br>
+                    <input class="btn btn-success" type="submit" name="ingresso" value="Cadastrar"><br>
 
                 </form>
             </div>
         <br>
-        </center>
+    </main>
+</section>
+</center>
         </body>
         </html>
 
@@ -348,12 +390,6 @@ if($_GET){
     $tot = mysqli_query($conn, $to);
     $total = mysqli_fetch_assoc($tot);
 
-    if($_SESSION['usuario']['tipo'] == 'admin'){
-
-        echo("Ingressos disponiveis: ");
-        echo(685 - $total['count(*)']);
-
-    }
     ?>
 
     <!DOCTYPE html>
@@ -367,7 +403,7 @@ if($_GET){
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
             integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
         <!-- Our Custom CSS -->
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="./css/style.css">
         <!-- Link Google Icons -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <!-- Font Awesome JS -->
@@ -381,25 +417,38 @@ if($_GET){
 
     <body>
         <center>
+        <main class="back">
+        <div class="header">
+                <img height="65px" width="auto" src="../images/softLogo.png" alt="Logo">
+                <div style="display: flex; font-size: 20px;">
 
-            <div>
+                <a style="margin-right: 15px; color: #fff;" href="?modo=cupom">Verificar Cupom</a><br>
+                <!--a href="?modo=ingresso">Ingresso Vendido</a><br-->
 
-                    <a href="?modo=cupom">Verificar Cupom</a><br>
-                    <!--a href="?modo=ingresso">Ingresso Vendido</a><br-->
+                <?php
+                    if($_SESSION['usuario']['tipo'] == 'admin'){
+
+                        echo("<a style='color: #fff;' href='?modo=cortesia'>Cortesia</a><br>");
+
+                    }
+
+                ?>
+
+                </div>
+                <div class="ingressos">
                     <?php
-                            if($_SESSION['usuario']['tipo'] == 'admin'){
+                        if($_SESSION['usuario']['tipo'] == 'admin'){
+                            echo("Ingressos disponiveis: ");
+                            echo(685 - $total['count(*)']);
+                        }
+                    ?>
+                </div>
+                </div>
+                    <section class="dashboard">
 
-                                echo("<a href='?modo=cortesia'>Cortesia</a><br>");
-
-                            }
-
-                        ?>
-
-
-            </div>
-
-        </center>
-
+                    </main>
+                </section>
+                </center>
 
     </body>
     </html>
