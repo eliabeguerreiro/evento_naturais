@@ -51,13 +51,14 @@ if($_GET){
                 <div style="display: flex; font-size: 20px;">
 
                 <a style="margin-right: 15px; color: #fff;" href="?modo=cupom">Verificar Cupom</a><br>
+                
                 <!--a href="?modo=ingresso">Ingresso Vendido</a><br-->
 
                 <?php
                     if($_SESSION['usuario']['tipo'] == 'admin'){
 
-                        echo("<a style='color: #fff;' href='?modo=cortesia'>Cortesia</a><br>");
-
+                        echo("<a style='color: #fff; margin-right: 15px;' href='?modo=cortesia'>Cortesia </a><br>");
+                        echo("<a style='color:  #fff; margin-right: 15px;' href='?modo=dashboard'>Dashboard </a><br>");
                     }
 
                 ?>
@@ -378,10 +379,14 @@ if($_GET){
 
         header("Location: cadastro.php?modo=cortesia");
 
+    }elseif($_GET['modo']=='dashboard'){
+          
+        header("Location: entradas.php");
+
     }
 
 
-//fim do if GET
+
 }else{
 
     $count ="count(*)";

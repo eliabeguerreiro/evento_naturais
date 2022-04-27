@@ -5,7 +5,7 @@ $senha = 'jOkinh@a';
 $senha_encriptada = password_hash($senha, PASSWORD_DEFAULT);
 echo($senha_encriptada);
 */
-echo("<h1>Não criar ingressos agora, aguarde novas atualizações!</h1>");
+
 ?>
 <html lang="pt-br">
 
