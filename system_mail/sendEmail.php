@@ -13,7 +13,6 @@
     $mensagem = '<center>
     <h2>Olá, '.$_SESSION['participante']['NOME'].'</h2>'.
 
-    $mensagem .= '<h3 style="margin-bottom: 0px;">Seu ingresso no 1º Simpósio Redepharma Naturais foi confirmada. O número do seu ingresso é:</h3>'.
     $mensagem .= '<h3 style="margin-bottom: 0px;">Seu ingresso no 1º Simpósio Redepharma Naturais foi confirmada. O número do seu ingresso é:</h3>';
     
         $comp = "SELECT * FROM entradas WHERE id_cliente = ".$_SESSION['ID']."";
