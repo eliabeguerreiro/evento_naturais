@@ -68,10 +68,10 @@ if($_SESSION['quantidade']){
 
             //header("Location: redepharma.com.br/email/index.php?id=$ingresso");
 
-            echo("<script>function redirect() {location.href='https://www.conect.redepharma.com.br/email/index.php?id=$ingresso'}; redirect()</script>");
+            echo("<script>function redirect() {location.href='https://www.conect.redepharma.com.br/email/index.php?id=$id'}; redirect()</script>");
           
             echo("<br><h2>PARABÉNS!<h2><br>
-            ESSE É O CÓDIGO DO SEU INGRESSO PARA O 1º SIMPÓSIO MULTIDISCIPLINAR FITNESS DA REDEPHARMA NATURAIS.<br>Número do Ingresso :".$ig."<br>");
+            ESSE É O CÓDIGO DO SEU INGRESSO PARA O 1º SIMPÓSIO MULTIDISCIPLINAR FITNESS DA REDEPHARMA NATURAIS.<br>Número do Ingresso :".$id."<br>");
         }
 
     }
