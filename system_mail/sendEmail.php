@@ -116,7 +116,16 @@
         <h1>1º Simpósio Naturais</h1>
     </div>
     <div class="Grupo2">
-        <p>Olá, <?php echo($_SESSION['participante']['NOME']) ?>. Sua participação no primeiro simpósio naturais está confirmado(a). Seu ingresso é <?php echo($_SESSION['comprovante']['codigo']) ?>.</p>
+        <p>Olá, <?php echo($_SESSION['participante']['NOME']) ?>. Sua participação no primeiro simpósio naturais está confirmado(a). Seu ingresso é <?php
+        $comp = "SELECT * FROM entradas WHERE id_cliente = ".$_GET['id']."";
+        $comprovante = mysqli_query($conn, $comp);
+       
+        while($_SESSION['comprovante'] = mysqli_fetch_assoc($comprovante)){
+    
+           echo$_SESSION['comprovante']['codigo'];
+    
+        }
+        ?>.</p>
     </div>
     <div class="Grupo3">
         <p>att. Equipe Redepharma.</p>
