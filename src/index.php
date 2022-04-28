@@ -399,5 +399,3 @@ if($_GET){
 <?php
 
 }
-
-var_dump($_SESSION);
