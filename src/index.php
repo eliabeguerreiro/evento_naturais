@@ -184,7 +184,7 @@ if($_GET){
                 $total = $_SESSION['preco'] * $_SESSION['qtd'];
                 $total /= 150;
                 $_SESSION['quantidade'] = number_format($total, 0, '.', '');
-                
+
                 header("Location: cadastro.php");
             
            }
