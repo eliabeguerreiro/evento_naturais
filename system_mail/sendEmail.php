@@ -15,7 +15,7 @@
 	
     <h3 style="margin-bottom: 0px;">Seu ingresso no 1º Simpósio Redepharma Naturais foi confirmada. O número do seu ingresso é:</h3>
 
-    ';
+    '.
 
 
     $comp = "SELECT * FROM entradas WHERE id_cliente = ".$_SESSION['ID']."";
@@ -122,7 +122,7 @@
        
         while($_SESSION['comprovante'] = mysqli_fetch_assoc($comprovante)){
     
-           echo$_SESSION['comprovante']['codigo'];
+           echo("<br>" . $_SESSION['comprovante']['codigo']);
 
     
         }
