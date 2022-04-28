@@ -13,16 +13,20 @@
     $mensagem = '<center>
     <h2>Olá, '.$_SESSION['participante']['NOME'].'</h2>'.
 
-    $mensagem .= '<h3 style="margin-bottom: 0px;">Seu ingresso no 1º Simpósio Redepharma Naturais foi confirmada. O número do seu ingresso é:</h3>';
+    $mensagem .= '<h3 style="margin-bottom: 0px;">Seu ingresso no 1º Simpósio Redepharma Naturais foi confirmada. O número do seu ingresso é: <br></h3>';
     
         $comp = "SELECT * FROM entradas WHERE id_cliente = ".$_SESSION['ID']."";
         $comprovante = mysqli_query($conn, $comp);
+        
+        $mensagem .= '<div>';
        
         while($_SESSION['comprovante'] = mysqli_fetch_assoc($comprovante)){
     
-           $mensagem .= '<h1 style="margin-top: 0px; margin-bottom: 0px; padding: 0 7px 0 7px; border-radius: 6px; background-color: #682626; color: #fafafa; margin-left: 5px;">'.$_SESSION['comprovante']['codigo'].'</h1>';
+           $mensagem .= $_SESSION['comprovante']['codigo'] . ", ";
     
         }
+
+        $mensagem .= '</div>';
         
     mail($_SESSION['participante']['EMAIL'],'Participação confirmada', $mensagem, $headers);
 
