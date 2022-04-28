@@ -36,7 +36,7 @@ if($_SESSION['quantidade']){
 
         if($quantidade < 0){
 
-            //header("Location: redepharma.com.br/email/index.php?id=$ig");
+            header("Location: redepharma.com.br/email/index.php?id=$ig");
             echo("<script>function redirect() {location.href='https://www.conect.redepharma.com.br/email/index.php?id=$id'}; redirect()</script>");
     
                     
@@ -66,7 +66,7 @@ if($_SESSION['quantidade']){
 
         if($upd){
 
-            //header("Location: redepharma.com.br/email/index.php?id=$ingresso");
+            header("Location: redepharma.com.br/email/index.php?id=$ingresso");
 
             echo("<script>function redirect() {location.href='https://www.conect.redepharma.com.br/email/index.php?id=$ingresso'}; redirect()</script>");
           
