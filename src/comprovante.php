@@ -28,6 +28,9 @@ if($_SESSION['quantidade']){
                 $u = "UPDATE entradas SET codigo = '$ig' WHERE id_entradas = $ingresso";
                 $upd = mysqli_query($conn, $u);
 
+                $u1 = "UPDATE participantes SET QTD = '".$_SESSION['quantidade']."' WHERE ID = ".$_SESSION['id_cliente']."";
+                $upd1 = mysqli_query($conn, $upd1);
+
                 $quantidade-=1;
 
             }

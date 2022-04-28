@@ -1,8 +1,26 @@
 <?php
     session_start();
+    include("./functions/conection.php");
+    
+
+    $part = "SELECT * FROM participantes WHERE ID = ".$_GET['id']."";
+    $participante = mysqli_query($conn, $part);
+    $_SESSION['participante'] = mysqli_fetch_assoc($participante);
 
     $headers = 'From: simposio.naturais@redepharma.com.br'."\r\n".'Reply-To:simposio.naturais@redepharma.com.br'."\r\n".
     $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+
+    
+
+    $comp = "SELECT * FROM entradas WHERE id_cliente = ".$_GET['id']."";
+    $comprovante = mysqli_query($conn, $comp);
+   
+    while($_SESSION['comprovante'] = mysqli_fetch_assoc($comprovante)){
+
+        echo($_SESSION['comprovaante']['codigo']);
+
+    }
+
     $mensagem = '<center>
     <h2>Olá, '.$_SESSION['participante']['NOME'].'</h2>
 	
