@@ -15,7 +15,7 @@
 
     $mensagem .= '<h3 style="margin-bottom: 0px;">Seu ingresso no 1º Simpósio Redepharma Naturais foi confirmada. O número do seu ingresso é: <br></h3>';
     
-        $comp = "SELECT * FROM entradas WHERE id_cliente = ".$_SESSION['ID']."order by id_entradas ASC ";
+        $comp = "SELECT * FROM entradas WHERE id_cliente = ".$_SESSION['ID']." order by id_entradas asc ";
         $comprovante = mysqli_query($conn, $comp);
         
         $mensagem .= '<div>';
@@ -114,7 +114,7 @@
     </div>
     <div class="Grupo2">
         <p>Olá, <?php echo($_SESSION['participante']['NOME']) ?>. Sua participação no primeiro simpósio naturais está confirmado(a). Seu ingresso é <?php
-        $comp = "SELECT * FROM entradas WHERE id_cliente = ".$_SESSION['ID']." order by id_entradas ASC";
+        $comp = "SELECT * FROM entradas WHERE id_cliente = ".$_SESSION['ID']."";
         $comprovante = mysqli_query($conn, $comp);
        
         while($_SESSION['comprovante'] = mysqli_fetch_assoc($comprovante)){
