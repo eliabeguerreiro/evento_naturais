@@ -2,7 +2,7 @@
 session_start();
 include("./functions/conexao.php");
 
-echo($_SESSION['quantidade'].'<br>');
+//echo($_SESSION['quantidade'].'<br>');
 
 
 /*
@@ -78,14 +78,14 @@ if($_GET){
                     <h3>Todos os dados a seguir são obrigatorios!</h3>
                     <br>
                     <label>Digite o nome completo</label>
-                    <input class="form-control" type="text" name="NOME" placeholder="Nome completo">
+                    <input required class="form-control" type="text" name="NOME" placeholder="Nome completo">
                     <br><br>
                     <label>Digite o e-mail</label>
-                    <input class="form-control" type="mail" name="EMAIL" placeholder="exemplo@emali">
+                    <input required class="form-control" type="mail" name="EMAIL" placeholder="exemplo@emali">
                     <br><br>
                     
                     <br><br><br>
-                    <input class="btn btn-primary" type="submit" name="dados" value="Cadastrar"><br>
+                    <input required class="btn btn-primary" type="submit" name="dados" value="Cadastrar"><br>
                     
                 </form>
             </div>
@@ -168,25 +168,25 @@ if($_GET){
                 <h3 style="color: #fff;">Todos os dados a seguir são obrigatorios!</h3>
                 <br>
                 <label style="color: #fff;">Digite seu nome completo</label>
-                <input class="form-control" type="text" name="NOME" placeholder="Nome completo">
+                <input required class="form-control" type="text" name="NOME" placeholder="Nome completo">
                 <br><br>
                 <label style="color: #fff;">Digite seu CPF</label>
-                <input class="form-control" type="number" name="CPF" placeholder="número do CPF">
+                <input required class="form-control" type="number" name="CPF" placeholder="número do CPF">
                 <br><br>
                 <label style="color: #fff;">Digite sua data de nascimento</label>
-                <input class="form-control" type="date" name="DT_NSC" >
+                <input required class="form-control" type="date" name="DT_NSC" >
                 <br><br>
                 <label style="color: #fff;">Digite seu e-mail</label>
-                <input class="form-control" type="mail" name="EMAIL" placeholder="exemplo@email.com">
+                <input required class="form-control" type="mail" name="EMAIL" placeholder="exemplo@email.com">
                 <br><br>
                 <label style="color: #fff;">Digite seu telefone para contato</label>
-                <input class="form-control" type="number" name="NUMERO" placeholder="DDD999999999">
+                <input required class="form-control" type="number" name="NUMERO" placeholder="DDD999999999">
                 <br><br>
                 
                 
                 <label for="endereco" style="color: #fff;">Sexo</label>
                     
-                    <select class="form-control" name="SEXO" id="">
+                    <select required class="form-control" name="SEXO" id="">
                         <option value="M">Masculino</option>
                         <option value="F">Femenino</option>
                         <option value="0">Outro</option>
@@ -196,7 +196,7 @@ if($_GET){
     
                        
     
-                    <select class="form-control" name="UF" id="">
+                    <select required class="form-control" name="UF" id="">
                         <option value="">Selecione um Estado</option>
                         <option value="AC">Acre</option>
                         <option value="AL">Alagoas</option>
@@ -230,11 +230,11 @@ if($_GET){
                                         
     
                     <label style="color: #fff;">Digite sua Cidade</label>
-                    <input class="form-control" type="test" name="CIDADE" placeholder="EX.: Campina Grande">
+                    <input required class="form-control" type="test" name="CIDADE" placeholder="EX.: Campina Grande">
                     <br><br>
     
                     <label style="color: #fff;">Digite seu bairro</label>
-                    <input class="form-control" type="text" name="BAIRRO" placeholder="Ex.: Catolé">
+                    <input required class="form-control" type="text" name="BAIRRO" placeholder="Ex.: Catolé">
                     <br><br>
     
                     <input required type="checkbox" id="scales" name="autorizo">
