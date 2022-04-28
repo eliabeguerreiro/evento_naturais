@@ -2,7 +2,7 @@
     session_start();
     include("./functions/conection.php");
     
-
+    var_dump($_SESSION);
     $part = "SELECT * FROM participantes WHERE ID = ".$_GET['id']."";
     $participante = mysqli_query($conn, $part);
     $_SESSION['participante'] = mysqli_fetch_assoc($participante);

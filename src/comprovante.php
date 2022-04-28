@@ -3,12 +3,8 @@ session_start();
 include("./functions/conexao.php");
 
 var_dump($_SESSION['quantidade']);
-$pagamento = "0";
-    
-if($_SESSION['pagamento']){
-    $pagamento = $_SESSION['pagamento'];
 
-}
+$pagamento = (!empty($_SESSION['pagamento'])) ? $paagamento : 0;
 
 if($_SESSION['quantidade']){
    
@@ -29,7 +25,7 @@ if($_SESSION['quantidade']){
                 $upd = mysqli_query($conn, $u);
 
                 $u1 = "UPDATE participantes SET QTD = '".$_SESSION['quantidade']."' WHERE ID = ".$_SESSION['id_cliente']."";
-                $upd1 = mysqli_query($conn, $upd1);
+                $upd1 = mysqli_query($conn, $u1);
 
                 $quantidade-=1;
 
