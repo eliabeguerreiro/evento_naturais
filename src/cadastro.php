@@ -2,9 +2,6 @@
 session_start();
 include("./functions/conexao.php");
 
-echo($_SESSION['quantidade'].'<br>');
-
-
 /*
 if(!empty($_SESSION['usuario']['id']))
 {}
@@ -17,8 +14,6 @@ else{$_SESSION['msg']='Você precisa logar para acessar o painel!</br>';
 if($_GET){
     if($_GET['modo'] == 'cortesia'){
 
-
-                
         if($_POST){
            
             //echo(date('Y,m,d'));
@@ -165,6 +160,7 @@ if($_GET){
     <section class="dashboard">
         <div style="background-color: #b0bd6d; padding: 50px 70px 50px 70px; border-radius: 15px; border-width: 2px; border-style: solid; border-color: #748535">
             <form method="POST" action="" enctype="multipart/form-data">
+                <h5 style="color: #fff;">Quantidade de Ingressos gerados: <?php echo($_SESSION['quantidade']); ?></h5><br>
                 <h3 style="color: #fff;">Todos os dados a seguir são obrigatorios!</h3>
                 <br>
                 <label style="color: #fff;">Digite seu nome completo</label>

@@ -182,7 +182,7 @@ if($_GET){
                 $total = $PRECO['0']['VLR_TABELA'] * $_SESSION['qtd'];
                 $total /= 150;
                 $_SESSION['quantidade'] = number_format($total, 0, '.', '');
-
+                $_SESSION['cupom'] = $_POST['NR_ECF'];
                 header("Location: cadastro.php");
             
            }
