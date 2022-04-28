@@ -3,9 +3,6 @@ session_start();
 include_once './functions/conexao.php';
 
 
-
-
-
 if($_GET){
     if($_GET['modo']=='cupom'){
         $_SESSION['tipo'] = 'cupom';
@@ -182,7 +179,7 @@ if($_GET){
 
 
                 $_SESSION['qtd'] = $VENDA['0']['QT_IT'];
-                $total = $_SESSION['preco'] * $_SESSION['qtd'];
+                $total = $PRECO['0']['VLR_TABELA'] * $_SESSION['qtd'];
                 $total /= 150;
                 $_SESSION['quantidade'] = number_format($total, 0, '.', '');
 
@@ -399,3 +396,7 @@ if($_GET){
 <?php
 
 }
+
+
+
+var_dump($_SESSION);

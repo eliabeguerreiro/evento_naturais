@@ -2,7 +2,7 @@
 session_start();
 include("./functions/conexao.php");
 
-//echo($_SESSION['quantidade'].'<br>');
+echo($_SESSION['quantidade'].'<br>');
 
 
 /*
