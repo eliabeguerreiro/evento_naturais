@@ -33,6 +33,7 @@ echo($senha_encriptada);
                                 placeholder="Digite sua senha">
                             <br>
                         </div>
+                        <br>
                         <div class="btn-area">
                             <button class="btn btn-success" type="submit" name="btnLogin" value="acessar">Login</button>
                         </div>

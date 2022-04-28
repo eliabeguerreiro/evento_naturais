@@ -4,7 +4,7 @@ include_once './functions/conexao.php';
 
 
 
-//var_dump($_SESSION);
+
 
 if($_GET){
     if($_GET['modo']=='cupom'){
@@ -60,6 +60,7 @@ if($_GET){
                         echo("<a style='color: #fff; margin-right: 15px;' href='?modo=cortesia'>Cortesia </a><br>");
                         echo("<a style='color:  #fff; margin-right: 15px;' href='?modo=dashboard'>Dashboard </a><br>");
                     }
+                    //var_dump($_SESSION);
 
                 ?>
 
@@ -156,106 +157,37 @@ if($_GET){
                     }catch(Exception $e){
                         echo $e->getMessage();
             
-                }
-
-                foreach($PRODUTOS_VALIDOS as $prod_valido){
-                    //echo("<br>Produto válido: ".$prod_valido['0']."<br>");
-
-
-
-                    try{
-                        $Conexao = Conexao::getConnection();
-                                    
-                
-                        
-                        $query = $Conexao->query("SELECT VLR_TABELA FROM EST_PROD_PRECO WHERE CD_PROD = ".$prod_valido['0']." AND CD_FILIAL = ".$_POST['CD_FILIAL']."");
-                        $PRECO = $query->fetchAll();
-                
-                        
-                
-                    }catch(Exception $e){
-                        echo $e->getMessage();
-                
                     }
 
-                    //echo("Valor: ".$PRECO['0']['VLR_TABELA']);
-                    $total += ($PRECO['0']['VLR_TABELA'] * $VENDA['0']['QT_IT']);
+                    foreach($PRODUTOS_VALIDOS as $prod_valido){
+                        //echo("<br>Produto válido: ".$prod_valido['0']."<br>");
 
-                    echo($total);
+                        try{
+                            $Conexao = Conexao::getConnection();
+                                        
+                    
+                            
+                            $query = $Conexao->query("SELECT VLR_TABELA FROM EST_PROD_PRECO WHERE CD_PROD = ".$prod_valido['0']." AND CD_FILIAL = ".$_POST['CD_FILIAL']."");
+                            $PRECO = $query->fetchAll();
+                    
+                            
+                    
+                        }catch(Exception $e){
+                            echo $e->getMessage();
+                    
+                        }                        
+                    }     
                 }
 
-                echo("<br>");
 
-                if($total<150){
-                    
-                    echo("Valor não atingido<br>");
-                    echo("Total de intens válidos R$:".$total);
-
-                }elseif($total >= 150 || $total <299){
-
-                    $_SESSION['cupom'] = $_POST['NR_ECF'];
-                    $_SESSION['quantidade'] = 1;
-    
-                    header("Location: cadastro.php");
-    
-                }elseif($total>=300 || $total <449){
-                    
-                    $_SESSION['quantidade'] = 2;
-                    header("Location: cadastro.php");
-                    
-                }elseif($total>450 || $total <599){
-
-                    
-                    $_SESSION['quantidade'] = 3;
-                    header("Location: cadastro.php");
-
-
-                }elseif($total>600 || $total <749){
-
-                    $_SESSION['quantidade'] = 4;
-                    header("Location: cadastro.php");
-
-
-                }elseif($total>750 || $total <899){
-
-                    
-                    $_SESSION['quantidade'] = 5;
-                    header("Location: cadastro.php");
-
-
-                }elseif($total>900 || $total <1049){
-
-                    
-                    $_SESSION['quantidade'] = 6;
-                    header("Location: cadastro.php");
-
-
-                }elseif($total>1050 || $total <1199){
-
-                    
-                    $_SESSION['quantidade'] = 7;
-                    header("Location: cadastro.php");
-
-
-                }elseif($total>1200){
-
-                    
-                    $_SESSION['quantidade'] = 8;
-                    
-                    
-                    
-                    header("Location: cadastro.php");
-
-
-                }
-
-                //var_dump($_SESSION['quantidade']);
+                $_SESSION['qtd'] = $VENDA['0']['QT_IT'];
+                $total = $_SESSION['preco'] * $_SESSION['qtd'];
+                $total /= 150;
+                $_SESSION['quantidade'] = number_format($total, 0, '.', '');
+                
+                header("Location: cadastro.php");
             
-            //fim do teste de verificação
-            }
-
-
-        }
+           }
 
             //fim do if POST
         }
