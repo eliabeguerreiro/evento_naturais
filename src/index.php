@@ -57,8 +57,9 @@ if($_GET){
                 <?php
                     if($_SESSION['usuario']['tipo'] == 'admin'){
 
-                        echo("<a style='color: #fff; margin-right: 15px;' href='?modo=cortesia'>Cortesia </a><br>");
+                        echo("<a style='color: #fff; margin-right: 15px;' href='?modo=cortesia'>Cotesia </a><br>");
                         echo("<a style='color:  #fff; margin-right: 15px;' href='?modo=dashboard'>Dashboard </a><br>");
+                        
                     }
                     //var_dump($_SESSION);
 
@@ -394,3 +395,5 @@ if($_GET){
 <?php
 
 }
+
+var_dump($_SESSION);
