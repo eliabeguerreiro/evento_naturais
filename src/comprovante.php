@@ -9,7 +9,7 @@ $pagamento = (!empty($_SESSION['pagamento'])) ? $paagamento : 0;
 if($_SESSION['quantidade']){
    
         $quantidade = $_SESSION['quantidade'];
-        while($quantidade > 0){
+        while($quantidade >= 0){
             
             $ing = "INSERT INTO entradas (id_cliente, user_vendedor, tipo, pagamento, cupom) VALUES  
             (".$_SESSION['id_cliente'].",".$_SESSION['usuario']['cd_loja'].",'".$_SESSION['tipo']."','".$pagamento."','".$_SESSION['cupom']."')";
