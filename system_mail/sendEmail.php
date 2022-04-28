@@ -2,7 +2,7 @@
     session_start();
     include("./functions/conection.php");
     
-    var_dump($_SESSION);
+    //var_dump($_SESSION);
     $part = "SELECT * FROM participantes WHERE ID = ".$_SESSION['ID']."";
     $participante = mysqli_query($conn, $part);
     $_SESSION['participante'] = mysqli_fetch_assoc($participante);
@@ -17,8 +17,8 @@
 
     ';
 
+
     $comp = "SELECT * FROM entradas WHERE id_cliente = ".$_SESSION['ID']."";
-    echo$comp;
     $comprovante = mysqli_query($conn, $comp);
    
     while($_SESSION['comprovante'] = mysqli_fetch_assoc($comprovante)){
@@ -117,12 +117,13 @@
     </div>
     <div class="Grupo2">
         <p>Olá, <?php echo($_SESSION['participante']['NOME']) ?>. Sua participação no primeiro simpósio naturais está confirmado(a). Seu ingresso é <?php
-        $comp = "SELECT * FROM entradas WHERE id_cliente = ".$_GET['id']."";
+        $comp = "SELECT * FROM entradas WHERE id_cliente = ".$_SESSION['ID']."";
         $comprovante = mysqli_query($conn, $comp);
        
         while($_SESSION['comprovante'] = mysqli_fetch_assoc($comprovante)){
     
            echo$_SESSION['comprovante']['codigo'];
+
     
         }
         ?>.</p>
