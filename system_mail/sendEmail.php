@@ -10,23 +10,23 @@
     $headers = 'From: simposio.naturais@redepharma.com.br'."\r\n".'Reply-To:simposio.naturais@redepharma.com.br'."\r\n".
     $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
 
-    
+    $mensagem = '<center>
+    <h2>Olá, '.$_SESSION['participante']['NOME'].'</h2>
+	
+    <h3 style="margin-bottom: 0px;">Seu ingresso no 1º Simpósio Redepharma Naturais foi confirmada. O número do seu ingresso é:</h3>
+
+    ';
 
     $comp = "SELECT * FROM entradas WHERE id_cliente = ".$_GET['id']."";
     $comprovante = mysqli_query($conn, $comp);
    
     while($_SESSION['comprovante'] = mysqli_fetch_assoc($comprovante)){
 
-        echo($_SESSION['comprovaante']['codigo']);
+       $mensagem .= '<h1 style="margin-top: 0px; margin-bottom: 0px; padding: 0 7px 0 7px; border-radius: 6px; background-color: #682626; color: #fafafa; margin-left: 5px;">'.$_SESSION['comprovante']['codigo'].'</h1>';
 
     }
-
-    $mensagem = '<center>
-    <h2>Olá, '.$_SESSION['participante']['NOME'].'</h2>
 	
-    <h3 style="margin-bottom: 0px;">Seu ingresso no 1º Simpósio Redepharma Naturais foi confirmada. O número do seu ingresso é:</h3>
-	<h1 style="margin-top: 0px; margin-bottom: 0px; padding: 0 7px 0 7px; border-radius: 6px; background-color: #682626; color: #fafafa; margin-left: 5px;">'.$_SESSION['comprovante']['codigo'].'</h1>
-    <h3 style="margin-top: 0px;margin-bottom: 0px;">É importante que você leve um documento de identificação, ou o comprovante no dia do evento.</h3><br>
+    $mensagem .= '<h3 style="margin-top: 0px;margin-bottom: 0px;">É importante que você leve um documento de identificação, ou o comprovante no dia do evento.</h3><br>
     
     <p style="margin-top: 0px;margin-bottom: 0px;">Att. Equipe Redepharma.</p>
     </center>';
