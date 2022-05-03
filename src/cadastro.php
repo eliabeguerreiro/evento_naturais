@@ -2,6 +2,7 @@
 session_start();
 include("./functions/conexao.php");
 
+var_dump($_SESSION['usuario']['cd_loja']);
 /*
 if(!empty($_SESSION['usuario']['id']))
 {}
@@ -22,8 +23,8 @@ if($_GET){
             
             $dados = $_POST;
                 
-            $cad = "INSERT INTO participantes (NOME, CPF, EMAIL, NUMERO, DT_NSC, CIDADE, BAIRRO, UF, SEXO) values 
-            ('".$dados['NOME']."', '0', '".$dados['EMAIL']."', '0', '".date('Y,m,d')."', '0', '0', '0', '0') ";
+            $cad = "INSERT INTO participantes (NOME, CPF, EMAIL, NUMERO, DT_NSC, CIDADE, BAIRRO, UF, SEXO, LOJA) values 
+            ('".$dados['NOME']."', '0', '".$dados['EMAIL']."', '0', '".date('Y,m,d')."', '0', '0', '0', '0', '".$_SESSION['usuario']['cd_loja']."') ";
             $cada = mysqli_query($conn, $cad);
             
 
@@ -78,9 +79,12 @@ if($_GET){
                     <label>Digite o e-mail</label>
                     <input required class="form-control" type="mail" name="EMAIL" placeholder="exemplo@emali">
                     <br><br>
+                    <!--label>Quantidade</label>
+                    <input required class="form-control" type="number" name="number">
+                    <br><br-->
                     
                     <br><br><br>
-                    <input required class="btn btn-primary" type="submit" name="dados" value="Cadastrar"><br>
+                    <input  class="btn btn-primary" type="submit" name="dados" value="Cadastrar"><br>
                     
                 </form>
             </div>
@@ -110,9 +114,9 @@ if($_GET){
                   
             $_SESSION['dados']['cadastrais'] = $dados;    
             
-            $cad = "INSERT INTO participantes (NOME, CPF, EMAIL, NUMERO, DT_NSC, CIDADE, BAIRRO, UF, SEXO) values 
+            $cad = "INSERT INTO participantes (NOME, CPF, EMAIL, NUMERO, DT_NSC, CIDADE, BAIRRO, UF, SEXO, LOJA) values 
             
-            ('".$dados['NOME']."', '".$dados['CPF']."', '".$dados['EMAIL']."', '".$dados['NUMERO']."', '".$dados['DT_NSC']."', '".$dados['CIDADE']."', '".$dados['BAIRRO']."', '".$dados['UF']."', '".$dados['SEXO']."')";
+            ('".$dados['NOME']."', '".$dados['CPF']."', '".$dados['EMAIL']."', '".$dados['NUMERO']."', '".$dados['DT_NSC']."', '".$dados['CIDADE']."', '".$dados['BAIRRO']."', '".$dados['UF']."', '".$dados['SEXO']."', '".$_SESSION['usuario']['cd_loja']."')";
             echo($cad);
             $cada = mysqli_query($conn, $cad);
             

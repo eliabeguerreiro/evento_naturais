@@ -2,15 +2,16 @@
 session_start();
 include("./functions/conexao.php");
 
-var_dump($_SESSION['quantidade']);
+var_dump($_SESSION);
 
-$pagamento = (!empty($_SESSION['pagamento'])) ? $paagamento : 0;
+$pagamento = (!empty($_SESSION['pagamento'])) ? $pagamento : 0;
+$id = $_SESSION['id_cliente'];
 
 if($_SESSION['quantidade']){
    
         $quantidade = $_SESSION['quantidade'];
-        while($quantidade >= 0){
-            
+        while($quantidade > 0){
+
             $ing = "INSERT INTO entradas (id_cliente, user_vendedor, tipo, pagamento, cupom) VALUES  
             (".$_SESSION['id_cliente'].",".$_SESSION['usuario']['cd_loja'].",'".$_SESSION['tipo']."','".$pagamento."','".$_SESSION['cupom']."')";
 
@@ -27,12 +28,11 @@ if($_SESSION['quantidade']){
                 $u1 = "UPDATE participantes SET QTD = '".$_SESSION['quantidade']."' WHERE ID = ".$_SESSION['id_cliente']."";
                 $upd1 = mysqli_query($conn, $u1);
 
-                $quantidade-=1;
-
             }
-            
+            $quantidade-=1;
+
         }
-        $id = $_SESSION['id_cliente'];
+        
 
         if($quantidade <= 0){
 

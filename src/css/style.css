@@ -32,4 +32,87 @@ center .header {
     justify-content: space-between;
     padding-left: 30px;
     padding-right: 30px;
+    z-index: 9;
+}
+
+.search {
+    display: flex;
+    margin-top: 15px;
+    padding: 10px 35px 10px 35px;
+    width: 50%;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 7px rgba(0,0,0, 0.2);
+    background: rgba(255,255,255, 0.5);
+}
+
+form#searchbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
+form#searchbar input{
+    width: 50%;
+}
+
+.recentInbox {
+    position: relative;
+    display: grid;
+    min-height: 100px;
+    max-height: 730px;
+    background: rgba(255,255,255, 0.5);
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    border-radius: 20px;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+table thead td {
+    font-weight: 600;
+}
+
+.recentInbox table tr {
+    color: #000;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.recentInbox table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.recentInbox table tbody tr {
+    transition: all 0.2s;
+}
+
+.recentInbox table tbody tr:hover {
+    background: #748535;
+    color: #fff;
+    cursor: pointer;
+}
+
+.recentInbox table tbody tr td {
+    padding: 10px;
+}
+
+.recentInbox table tr td:last-child {
+    text-align: end;
+}
+
+.recentInbox table tr td:nth-child(2) {
+    text-align: end;
+}
+
+.recentInbox table tr td:nth-child(3) {
+    text-align: center;
+}
+
+.recentInbox table tbody tr td:first-child {
+    font-weight: 600;
 }

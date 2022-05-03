@@ -54,7 +54,7 @@ if($_GET){
                 <?php
                     if($_SESSION['usuario']['tipo'] == 'admin'){
 
-                        echo("<a style='color: #fff; margin-right: 15px;' href='?modo=cortesia'>Cortesia </a><br>");
+                        echo("<a style='color: #fff; margin-right: 15px;' href='index.php?modo=cortesia'>Cortesia </a><br>");
                         echo("<a style='color:  #fff; margin-right: 15px;' href='?modo=dashboard'>Dashboard </a><br>");
                         
                     }
@@ -245,10 +245,9 @@ if($_GET){
                 <?php
                     if($_SESSION['usuario']['tipo'] == 'admin'){
 
-                        echo("<a style='color: #fff; margin-right: 15px;' href='?modo=cortesia'>Cortesia </a><br>");
+                        echo("<a style='color: #fff; margin-right: 15px;' href='index.php?modo=cortesia'>Cortesia </a><br>");
                         echo("<a style='color:  #fff; margin-right: 15px;' href='?modo=dashboard'>Dashboard </a><br>");
                         
-
                     }
 
                 ?>
@@ -356,9 +355,9 @@ if($_GET){
         <center>
         <main class="back">
         <div class="header">
-                <img height="65px" width="auto" src="../images/softLogo.png" alt="Logo">
+                <img onclick="location.href='./'" height="65px" width="auto" src="../images/softLogo.png" alt="Logo">
                 <div style="display: flex; font-size: 20px;">
-
+                
                 <a style="margin-right: 15px; color: #fff;" href="?modo=cupom">Verificar Cupom</a><br>
                 <!--a href="?modo=ingresso">Ingresso Vendido</a><br-->
 
@@ -399,4 +398,4 @@ if($_GET){
 
 
 
-var_dump($_SESSION);
+//var_dump($_SESSION);
