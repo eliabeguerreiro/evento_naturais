@@ -117,10 +117,10 @@ if($_GET){
 
             if($verify != 0){
 
-                
                 echo("Esse cupom já foi utilizado!<br>");
 
             }else{
+
                 
                 try{
                     $Conexao = Conexao::getConnection();
@@ -192,127 +192,19 @@ if($_GET){
                 $_SESSION['quantidade'] = number_format($_SESSION['total'], 0, '.', '');
                 $_SESSION['cupom'] = $_POST['NR_ECF'];
 
+                echo  $_SESSION['total'];
+                echo("<br>");
+                echo  $_SESSION['quantidade'];
+                echo("<br>");
+                echo  $_SESSION['cupom'];
+                echo("<br>");
             
-                header("Location: cadastro.php");
+                //header("Location: cadastro.php");
             
            }
 
             //fim do if POST
         }
-
-
-    }elseif($_GET['modo']=='ingresso'){
-        $_SESSION['tipo'] = 'ingresso';
-
-        if($_POST){
-
-            $_SESSION['pagamento'] = $_POST['PAGAMENTO'];
-            header("Location: cadastro.php");
-
-
-        }
-        
-        $count ="count(*)";
-        $to = "SELECT $count FROM entradas";
-
-        $tot = mysqli_query($conn, $to);
-        $total = mysqli_fetch_assoc($tot);
-
-        ?>
-        <!DOCTYPE html>
-        <html lang="pt-br">
-    
-        <head>
-            <title>Ingresso comprado</title>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <!-- Bootstrap CSS CDN -->
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
-                integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-            <!-- Our Custom CSS -->
-            <link rel="stylesheet" href="./css/style.css">
-            <!-- Link Google Icons -->
-            <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-            <!-- Font Awesome JS -->
-            <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
-                integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous">
-            </script>
-            <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
-                integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous">
-            </script>
-        </head>
-    
-        <body>
-            <center>
-            <main class="back">
-            <div class="header">
-                <img height="65px" width="auto" src="../images/softLogo.png" alt="Logo">
-                <div style="display: flex; font-size: 20px;">
-
-                <a style="margin-right: 15px; color: #fff;" href="?modo=cupom">Verificar Cupom</a><br>
-                <!--a href="?modo=ingresso">Ingresso Vendido</a><br-->
-
-                <?php
-                    if($_SESSION['usuario']['tipo'] == 'admin'){
-
-                        echo("<a style='color: #fff; margin-right: 15px;' href='index.php?modo=cortesia'>Cortesia </a><br>");
-                        echo("<a style='color:  #fff; margin-right: 15px;' href='?modo=dashboard'>Dashboard </a><br>");
-                        
-                    }
-
-                ?>
-
-                </div>
-                <div class="ingressos">
-                    <?php
-                        if($_SESSION['usuario']['tipo'] == 'admin'){
-                            echo("Ingressos disponiveis: ");
-                            echo(685 - $total['count(*)']);
-                        }
-                    ?>
-                </div>
-                </div>
-                    <section class="dashboard">
-    
-            
-            <div style="background-color: #b0bd6d; padding: 50px 70px 50px 70px; border-radius: 15px; border-width: 2px; border-style: solid; border-color: #748535">
-            <form method="POST" action="" enctype="multipart/form-data">
-
-            <h3><label for="endereco">Selecione a forma de pagamento</label></h3>
-    
-            <div class="col-md-4">
-                
-
-                <select class="form-control" name="PAGAMENTO" id="">
-                    <option value="">selecione</option>
-                    <option value="debito">Debito</option>
-                    <option value="credito">Credito</option>
-                    <option value="dinheiro">Dinheiro</option>
-                    <option value="pix">PIX</option>
-                    <option value="transferencia">Tranferencia</option>
-                    
-                </select><br><br>   
-                                    
-                </div>
-
-                    <br>
-                    <input class="btn btn-success" type="submit" name="ingresso" value="Cadastrar"><br>
-
-                </form>
-            </div>
-        <br>
-    </main>
-</section>
-</center>
-        </body>
-        </html>
-
-
-        <?php
-    
-    
-
-        //loja, forma de pagamente, 
 
 
     }elseif($_GET['modo']=='cortesia'){

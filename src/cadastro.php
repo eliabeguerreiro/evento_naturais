@@ -2,7 +2,7 @@
 session_start();
 include("./functions/conexao.php");
 
-var_dump($_SESSION['usuario']['cd_loja']);
+//var_dump($_SESSION['usuario']['cd_loja']);
 /*
 if(!empty($_SESSION['usuario']['id']))
 {}
@@ -64,6 +64,7 @@ if($_GET){
 
         <body>
             <center>
+                <h1> ESTAMOS CORRIGINDO ESTA PÁGINA, FAVAOR NÃO CADASTRAR</h1>
                 <?php
 
         ?>
@@ -241,7 +242,6 @@ if($_GET){
                     <label style="color: #fff;" for="scales">Autorizo o uso dos meus dados para terceiros a fins comerciais, nos termos da Política de Privacidade e da Lei 12.965/14.</label>
                 
     
-    
                 <br><br><br>
                 <input class="btn btn-success" type="submit" name="dados" value="Cadastrar"><br>
     
@@ -255,3 +255,4 @@ if($_GET){
     <?php
 
 }
+var_dump($linhasEmail);

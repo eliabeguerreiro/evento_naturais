@@ -108,6 +108,7 @@
 
 <button onclick="location.href='http://10.7.0.211/evento_naturais'">Voltar</button>
 <button onclick="getPDF()" id="downloadbtn">Download PDF</button>
+<h1>Email enviado com sucesso!</h1>
 
 <div style="width: 690px; height: 920px; display: flex; flex-direction: column; padding-left: 40px" class="canvas_div_pdf">
     <div class="Grupo1">

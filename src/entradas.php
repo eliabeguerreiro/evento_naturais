@@ -95,9 +95,11 @@ $count ="count(*)";
                     <thead>
                         <tr>
 
-                            <td>Numero do ingresso</td>   
+                            <td>Número do ingresso</td>   
                             <td>Nome</td>
                             <td>CPF</td>
+                            <td>Tipo</td>
+                            <td>Telefone</td>
                             <td>E-mail</td>
                             
                         </tr>
@@ -112,7 +114,7 @@ $count ="count(*)";
     while($cliente = mysqli_fetch_assoc($query_cliente)){
         
         
-        $select_ingresso = "SELECT * FROM entradas WHERE id_cliente = '".$cliente['ID']."'";
+        $select_ingresso = "SELECT * FROM entradas WHERE id_cliente = '".$cliente['ID']."' ORDER BY id_entradas DESC";
                         $query_ingresso = mysqli_query($conn, $select_ingresso);
                         $ingressos = mysqli_fetch_assoc($query_ingresso);
     
@@ -120,11 +122,13 @@ $count ="count(*)";
                             echo("
         
                             <tr>
-                            <td>".$ingressos['codigo']."</td>
-                            <td>".$cliente['NOME']."</td>
-                            <td>".$cliente['CPF']."</td>
-                            <td>".$cliente['EMAIL']."</td>
-                            <!--td> <a href='#' type='button' class='btn btn-primary'>Confirmar Presença</a></td-->
+                                <td>".$ingressos['codigo']."</td>
+                                <td>".$cliente['NOME']."</td>
+                                <td>".$cliente['CPF']."</td>
+                                <td>".$ingressos['tipo']."</td>
+                                <td>".$cliente['NUMERO']."</td>
+                                <td>".$cliente['EMAIL']."</td>
+                                <!--td> <a href='#' type='button' class='btn btn-primary'>Confirmar Presença</a></td-->
                             </tr>
         
                             ");
@@ -132,17 +136,20 @@ $count ="count(*)";
     
                 }else{
     
-                    $select_ingresso = "SELECT * FROM entradas";
+                    $select_ingresso = "SELECT * FROM entradas ORDER BY id_entradas DESC";
                     $query_ingresso = mysqli_query($conn, $select_ingresso);
     
                     ?>
                         <thead>
                             <tr>
-    
-                                <td>Numero do ingresso</td>   
+        
+                                <td>Número do ingresso</td>   
                                 <td>Nome</td>
                                 <td>CPF</td>
+                                <td>Tipo</td>
+                                <td>Telefone</td>
                                 <td>E-mail</td>
+                            
                                 
                             </tr>
                             
@@ -163,11 +170,13 @@ $count ="count(*)";
                     echo("
                     
                     <tr>
-                    <td>".$ingressos['codigo']."</td>
-                    <td>".$cliente['NOME']."</td>
-                    <td>".$cliente['CPF']."</td>
-                    <td>".$cliente['EMAIL']."</td>
-                    <!--td> <a href='#' type='button' class='btn btn-primary'>Confirmar Presença</a></td-->
+                        <td>".$ingressos['codigo']."</td>
+                        <td>".$cliente['NOME']."</td>
+                        <td>".$cliente['CPF']."</td>
+                        <td>".$ingressos['tipo']."</td>
+                        <td>".$cliente['NUMERO']."</td>
+                        <td>".$cliente['EMAIL']."</td>
+                        <!--td> <a href='#' type='button' class='btn btn-primary'>Confirmar Presença</a></td-->
                     </tr>
                     
                     ");
