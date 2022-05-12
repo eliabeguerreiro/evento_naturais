@@ -140,7 +140,6 @@ if($_GET){
                     $query = $Conexao->query("SELECT CD_PROD FROM PDV_VD_IT WHERE CD_VD = ".$CUPON['0']['CD_VD']."");
                     $VENDA = $query->fetchAll();
 
-
                 }catch(Exception $e){
                     echo $e->getMessage();
 
@@ -166,7 +165,7 @@ if($_GET){
                         try{
                             $Conexao = Conexao::getConnection();
         
-                            $query = $Conexao->query("SELECT QT_IT FROM PDV_VD_IT WHERE CD_VD = ".$prod_valido['0']."");
+                            $query = $Conexao->query("SELECT QT_IT FROM PDV_VD_IT WHERE CD_VD = ".$CUPON['0']['CD_VD']." AND CD_PROD = ".$prod_valido['0']."");
                             $QUANTIDADE = $query->fetchAll();
         
                             //var_dump($QUANTIDADE[0]['QT_IT']);
@@ -408,4 +407,4 @@ if($_GET){
 
 
 
-var_dump($_SESSION);
+//var_dump($_SESSION);

@@ -5,6 +5,10 @@ include("./functions/conexao.php");
 //var_dump($_SESSION);
 
 $pagamento = (!empty($_SESSION['pagamento'])) ? $pagamento : 0;
+$_SESSION['quantidade'] = (!empty($_SESSION['quantidade'])) ? $_SESSION['quantidade'] : 1;
+
+
+
 $id = $_SESSION['id_cliente'];
 
 

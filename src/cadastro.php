@@ -16,17 +16,33 @@ if($_GET){
     if($_GET['modo'] == 'cortesia'){
 
         if($_POST){
-           
+          
             //echo(date('Y,m,d'));
             echo('<br>');
 
             
             $dados = $_POST;
-                
-            $cad = "INSERT INTO participantes (NOME, CPF, EMAIL, NUMERO, DT_NSC, CIDADE, BAIRRO, UF, SEXO, LOJA) values 
-            ('".$dados['NOME']."', '0', '".$dados['EMAIL']."', '0', '".date('Y,m,d')."', '0', '0', '0', '0', '".$_SESSION['usuario']['cd_loja']."') ";
-            $cada = mysqli_query($conn, $cad);
             
+
+            $tst_email = "SELECT * FROM participantes WHERE EMAIL = '".$dados['EMAIL']."'";
+            $tst_email_query = mysqli_query($conn, $tst_email);
+            $num_email = mysqli_num_rows($tst_email_query);
+
+
+            if($num_email != 0){
+
+            
+                header("Location:?modo=cortesia");
+                $_SESSION['msg'] = "Esse e-mail já foi cadastrado";
+
+            }else{
+
+                    
+                $cad = "INSERT INTO participantes (NOME, CPF, EMAIL, NUMERO, DT_NSC, CIDADE, BAIRRO, UF, SEXO, LOJA) values 
+                ('".$dados['NOME']."', '0', '".$dados['EMAIL']."', '0', '".date('Y,m,d')."', '0', '0', '0', '0', '".$_SESSION['usuario']['cd_loja']."') ";
+                $cada = mysqli_query($conn, $cad);
+                
+            }
 
 
             if($cada){
@@ -255,4 +271,3 @@ if($_GET){
     <?php
 
 }
-var_dump($linhasEmail);
