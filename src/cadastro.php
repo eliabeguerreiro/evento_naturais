@@ -80,7 +80,6 @@ if($_GET){
 
         <body>
             <center>
-                <h1> ESTAMOS CORRIGINDO ESTA PÁGINA, FAVAOR NÃO CADASTRAR</h1>
                 <?php
 
         ?>
