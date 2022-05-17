@@ -8,14 +8,19 @@ try{
     $Conexao = Conexao::getConnection();
                 
     $query = $Conexao->query("
-        SELECT  *
+        SELECT
+                A.CD_PROD, 
+                A.CD_ARV_MERC_FAMILIA,
+                A.CD_MC,
+                A.CD_FABRIC,
+                A.CD_ARV_MERC_CATEG,
+                A.CD_ARV_MERC_LINHA
+                
         FROM 
-                V_EST_PROD_ARV_MERCADOLOGICA A INNER JOIN		
-                EST_PROD_TBL_DESC_EST_ARV_MERC_LINHA G ON G.CD_ARV_MERC_LINHA = A.CD_ARV_MERC_LINHA
+                V_EST_PROD_ARV_MERCADOLOGICA A 
         
         WHERE 
-            A.CD_PROD = 260 AND
-            G.CD_TBL_DESC = 1256	
+            A.CD_PROD = 260 
         ");
 
     $RESULTADO = $query->fetchAll();
@@ -26,4 +31,29 @@ try{
 
 }
 
-var_dump($RESULTADO);
+//var_dump($RESULTADO);
+
+foreach($RESULTADO as $result){
+
+    echo("<br>CD_PROD: ");
+    echo($result['CD_PROD']);
+
+    echo("<br>CD_ARV_MERC_FAMILIA: ");
+    echo($result['CD_ARV_MERC_FAMILIA']);
+
+    echo("<br>CD_MC: ");
+    echo($result['CD_MC']);
+
+    echo("<br>CD_FABRIC: ");
+    echo($result['CD_FABRIC']);
+
+    echo("<br>CD_ARV_MERC_CATEG: ");
+    echo($result['CD_ARV_MERC_CATEG']);
+
+    echo("<br>CD_ARV_MERC_LINHA: ");
+    echo($result['CD_ARV_MERC_LINHA']);
+
+    echo("<br>");
+
+
+}
